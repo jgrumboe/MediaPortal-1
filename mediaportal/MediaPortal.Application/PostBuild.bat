@@ -169,7 +169,11 @@ xcopy %1\..\Packages\MetadataExtractor.2.3.0\lib\net35\MetadataExtractor.dll . /
 xcopy %1\..\Packages\XmpCore.6.1.10\lib\net35\XmpCore.dll . /Y /D
 
 REM ffmpeg 
-xcopy %1\..\Packages\ffmpeg.2.7.1\ffmpeg.exe MovieThumbnailer\ /Y /D
+xcopy %1\..\Packages\ffmpeg.4.3.1\x86\ffmpeg.exe MovieThumbnailer\ /Y /D
+xcopy %1\..\Packages\ffmpeg.4.3.1\x86\av*.dll MovieThumbnailer\ /Y /D
+xcopy %1\..\Packages\ffmpeg.4.3.1\x86\postproc-*.dll MovieThumbnailer\ /Y /D
+xcopy %1\..\Packages\ffmpeg.4.3.1\x86\swresample-*.dll MovieThumbnailer\ /Y /D
+xcopy %1\..\Packages\ffmpeg.4.3.1\x86\swscale-*.dll MovieThumbnailer\ /Y /D
 
 REM Bass Core
 xcopy %1\core\bin\%2\Bass.Net.dll . /Y /D

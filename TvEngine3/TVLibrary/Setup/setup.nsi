@@ -556,9 +556,14 @@ ${MementoSection} "MediaPortal TV Server" SecServer
   File "${git_ROOT}\Packages\MediaInfo.Wrapper.19.4.1\lib\net40\MediaInfo.Wrapper.dll"
 
   ; thumbnail software
-  File "${git_ROOT}\Packages\ffmpeg.2.7.1\ffmpeg.exe"
+  ; FFmpeg
+  File "${git_ROOT}\Packages\ffmpeg.4.3.1\x86\ffmpeg.exe"
+  File "${git_ROOT}\Packages\ffmpeg.4.3.1\x86\av*.dll"
+  File "${git_ROOT}\Packages\ffmpeg.4.3.1\x86\postproc-*.dll"
+  File "${git_ROOT}\Packages\ffmpeg.4.3.1\x86\swresample-*.dll"
+  File "${git_ROOT}\Packages\ffmpeg.4.3.1\x86\swscale-*.dll"
+  ; MP DLL
   File "${git_TVServer}\TvThumbnails\bin\x86\${BUILD_TYPE}\TvThumbnails.dll"
-  
 
   ; protocol implementations for MPIPTVSource.ax
   File "${git_DirectShowFilters}\MPIPTVSource\bin\${BUILD_TYPE}\MPIPTV_FILE.dll"
@@ -741,8 +746,15 @@ ${MementoSectionEnd}
   Delete "$INSTDIR\tevii.dll"
   Delete "$INSTDIR\Ionic.Zip.dll"
   ;Delete "$INSTDIR\Interop.SHDocVw.dll"
+  ;Thumbnails
+  ;ffmpeg
   Delete "$INSTDIR\ffmpeg.exe"
+  Delete "$INSTDIR\av*.dll"
+  Delete "$INSTDIR\postproc-*.dll"
+  Delete "$INSTDIR\swresample-*.dll"
+  Delete "$INSTDIR\swscale-*.dll"
   Delete "$INSTDIR\TvThumbnails.dll"
+  ;MediaInfo
   Delete "$INSTDIR\MediaInfo.dll"
   Delete "$INSTDIR\libcrypto-1_1.dll"
   Delete "$INSTDIR\libcurl.dll"
