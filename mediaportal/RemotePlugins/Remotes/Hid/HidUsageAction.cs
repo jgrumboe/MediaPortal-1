@@ -373,41 +373,17 @@ namespace MediaPortal.InputDevices
           if ((Convert.ToInt32(aAction.CmdProperty) == (int)GUIWindow.Window.WINDOW_HOME) ||
               (Convert.ToInt32(aAction.CmdProperty) == (int)GUIWindow.Window.WINDOW_SECOND_HOME))
           {
-            GUIWindow.Window newHome = _basicHome ? GUIWindow.Window.WINDOW_SECOND_HOME : GUIWindow.Window.WINDOW_HOME;
-            // do we prefer to use only one home screen?
-            if (_useOnlyOneHome)
-            {
-              // skip if we are already in there
-              if (GUIWindowManager.ActiveWindow == (int)newHome)
-              {
-                break;
-              }
-            }
-            // we like both
-            else
-            {
-              // if already in one home switch to the other
-              switch (GUIWindowManager.ActiveWindow)
-              {
-                case (int)GUIWindow.Window.WINDOW_HOME:
-                  newHome = GUIWindow.Window.WINDOW_SECOND_HOME;
-                  break;
-
-                case (int)GUIWindow.Window.WINDOW_SECOND_HOME:
-                  newHome = GUIWindow.Window.WINDOW_HOME;
-                  break;
-              }
-            }
-            msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0, (int)newHome, 0, null);
+            Action homeAction = new Action(Action.ActionType.ACTION_SWITCH_HOME, 0, 0);
+            GUIGraphicsContext.OnAction(homeAction);
+            return true;
           }
           else
           {
             msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0,
-              Convert.ToInt32(aAction.CmdProperty),
-              0, null);
+                                 Convert.ToInt32(aAction.CmdProperty),
+                                 0, null);
+            GUIWindowManager.SendThreadMessage(msg);
           }
-
-          GUIWindowManager.SendThreadMessage(msg);
           break;
 
         case "TOGGLE": // toggle Layer 1/2
