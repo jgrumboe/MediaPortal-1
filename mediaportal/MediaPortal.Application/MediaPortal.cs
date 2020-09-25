@@ -1,6 +1,6 @@
-#region Copyright (C) 2005-2013 Team MediaPortal
+#region Copyright (C) 2005-2020 Team MediaPortal
 
-// Copyright (C) 2005-2013 Team MediaPortal
+// Copyright (C) 2005-2020 Team MediaPortal
 // http://www.team-mediaportal.com
 // 
 // MediaPortal is free software: you can redistribute it and/or modify
@@ -4431,7 +4431,10 @@ public class MediaPortalApp : D3D, IRender
                 break;
             }
           }
-          var homeMsg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0, (int)newHome, 0, null);
+          var homeMsg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW, 0, 0, 0,
+                                       (int)newHome,
+                                       (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_HOME || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_SECOND_HOME) ? 1 : 0,
+                                       null);
           GUIWindowManager.SendThreadMessage(homeMsg);
           break;
 
@@ -5384,7 +5387,7 @@ public class MediaPortalApp : D3D, IRender
           break;
 
         case GUIMessage.MessageType.GUI_MSG_GOTO_WINDOW:
-          GUIWindowManager.ActivateWindow(message.Param1);
+          GUIWindowManager.ActivateWindow(message.Param1, message.Param2 == 1);
           GUIGraphicsContext.IsFullScreenVideo = GUIWindowManager.ActiveWindow == (int) GUIWindow.Window.WINDOW_TVFULLSCREEN ||
                                                  GUIWindowManager.ActiveWindow == (int) GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT ||
                                                  GUIWindowManager.ActiveWindow == (int) GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO ||
